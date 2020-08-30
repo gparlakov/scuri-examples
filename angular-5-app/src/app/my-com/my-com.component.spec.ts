@@ -12,6 +12,24 @@ describe('MyComComponent', () => {
         // assert
         // expect(c).toEqual
     });
+    it('do not mention the method name in the title', () => {
+        // arrange
+        const { build } = setup().default();
+        const c = build();
+        // act
+        c.aTestMethod();
+        // assert
+        // expect(c).toEqual
+    });
+    it('when the third method is called it should', () => {
+        // arrange
+        const { build } = setup().default();
+        const c = build();
+        // act
+        c.another();
+        // assert
+        // expect(c).toEqual
+    });
 });
 
 function setup() {

@@ -10,4 +10,7 @@ export class MyComComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit() {}
+    aTestMethod() {}
+
+    another() {}
 }
