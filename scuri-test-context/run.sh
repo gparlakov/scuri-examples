@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-˝# install the selected version of scuri
+# install the selected version of scuri
 npm i scuri@$1
 # stops the prompt which blocks the rest of the commands
 export NG_CLI_ANALYTICS=false
