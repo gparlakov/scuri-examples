@@ -46,7 +46,7 @@ RUN npm init -y
 RUN npm i @angular/cli@$CLI_VERSION
 RUN npx -p @angular/cli@$CLI_VERSION ng new --interactive=false --defaults --skip-git --routing $NG_NEW_ARGS $NG_NEW_NAME
 WORKDIR $NG_NEW_NAME
-COPY . ./src
+COPY . .
 COPY ./run.sh .
 EXPOSE 4200
 ENV NG_CLI_ANALYTICS=ci
