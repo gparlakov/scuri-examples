@@ -14,8 +14,9 @@ function addAutospyToPaths(path) {
         const switched = fileContents
             .replace(
                 /"baseUrl": ".\/",/,
-                `"baseUrl": "./",\n    "paths": {\n      "autospy": ["./auto-spy"]\n     },`
+                `"baseUrl": "./",\n    "paths": {\n      "autoSpy": ["./auto-spy"]\n     },`
             )
-        writeFileSync(path, switched)
+        writeFileSync(path, switched);
+        console.log('added path', `"paths": {\n      "autoSpy": ["./auto-spy"]\n     },`, 'to', path)
     }
 }

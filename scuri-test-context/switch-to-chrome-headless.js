@@ -17,6 +17,7 @@ function switchToHeadless(path) {
                 `browsers: ["ChromeHeadlessCustom"],\n    customLaunchers: {\n      ChromeHeadlessCustom: {\n        base: "ChromeHeadless",\n        flags: ["--no-sandbox"],\n      },\n    },`
             )
             .replace(/singleRun\s?:\s?false/, 'singleRun: true');
-        writeFileSync(path, switched)
+        writeFileSync(path, switched);
+        console.log('switched to ChromeHeadless in', path)
     }
 }

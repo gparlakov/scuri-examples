@@ -17,10 +17,10 @@ export NG_CLI_ANALYTICS=false
 node ./switch-to-chrome-headless.js ./karma.conf.js
 node ./switch-to-chrome-headless.js ./src/karma.conf.js
 # add autospy to paths and create the file
-node ./add-auto-spy-to-path.js ./tsconfig.js
+node ./add-auto-spy-to-path.js ./tsconfig.json
 npx ng g scuri:autospy
 
-npx ng g scuri:spec --name src/app/my-com.component.ts
+npx ng g scuri:spec --name src/app/my-com/my-com.component.ts
 npx ng g scuri:spec --name src/app/service.ts
 npx ng g scuri:spec --name src/app/other/other.component.ts
 

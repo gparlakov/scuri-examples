@@ -1,7 +1,7 @@
 import { of } from 'rxjs';
 
 export class Service {
-    property: string;
+    property: string = 'just a prop';
     method() {
         return 'true';
     }
