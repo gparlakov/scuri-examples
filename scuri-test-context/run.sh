@@ -1,10 +1,13 @@
 #!/bin/sh
+# kill the script if a command fails
+set -e
+
 if [ $# -lt 1 ]; then
   echo 1>&2 "$0: please provide scuri version like './run.sh latest' or './run.sh 1.2.0' also supported additional commands like './run.sh 1.2.0 'npx ng g scuri:spec --name --classTemplate myVolume:myclass-template.tmpl' '"
   exit 2
 fi
 
-# install the selected version of scuri
+˝# install the selected version of scuri
 npm i scuri@$1
 # stops the prompt which blocks the rest of the commands
 export NG_CLI_ANALYTICS=false
