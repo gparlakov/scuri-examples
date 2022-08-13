@@ -43,10 +43,10 @@ jobs:
           tags: gparlakov/scuri:angular-14-app-v2
           file: ./scuri-test-context/Dockerfile_with_chrome_headless
           context: ./scuri-test-context
-          build-args: 
-            - CLI_VERSION=14
-            - NG_NEW_NAME=test-scuri-ng14-app 
-            - NODE_VERSION=14
+          build-args: |
+            CLI_VERSION=14
+            NG_NEW_NAME=test-scuri-ng14-app 
+            NODE_VERSION=14
       # # Runs a single command using the runners shell
       # - name: Run a one-line script
       #   run: echo Hello, world!
