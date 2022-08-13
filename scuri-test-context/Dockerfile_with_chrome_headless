@@ -1,0 +1,53 @@
+ARG NODE_VERSION=8
+FROM "node:${NODE_VERSION}-buster-slim"
+LABEL name="chrome-headless" \
+	maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
+	version="3.0" \
+	description="Google Chrome Headless in a container"
+
+# Install deps + add Chrome Stable + purge all the things
+RUN apt-get update && apt-get install -y \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	gnupg \
+	--no-install-recommends \
+	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+	&& apt-get update && apt-get install -y \
+	google-chrome-stable \
+	fontconfig \
+	fonts-ipafont-gothic \
+	fonts-wqy-zenhei \
+	fonts-thai-tlwg \
+	fonts-kacst \
+	fonts-symbola \
+	fonts-noto \
+	fonts-freefont-ttf \
+	--no-install-recommends \
+	&& apt-get purge --auto-remove -y curl gnupg \
+	&& rm -rf /var/lib/apt/lists/*
+
+# Add Chrome as a user
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+	&& mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
+
+# Run Chrome non-privileged
+# USER chrome
+# WORKDIR /usr/chrome
+
+# Expose port 9222
+EXPOSE 9222
+
+ARG CLI_VERSION=latest
+ARG NG_NEW_ARGS=
+ARG NG_NEW_NAME=test-scuri-app
+RUN npm init -y
+RUN npm i @angular/cli@$CLI_VERSION
+RUN npx -p @angular/cli@$CLI_VERSION ng new --interactive=false --defaults --skip-git --routing $NG_NEW_ARGS $NG_NEW_NAME
+WORKDIR $NG_NEW_NAME
+COPY . ./src
+COPY ./run.sh .
+EXPOSE 4200
+ENV NG_CLI_ANALYTICS=ci
+ENTRYPOINT ./run.sh
