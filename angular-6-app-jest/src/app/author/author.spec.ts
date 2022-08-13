@@ -6,7 +6,7 @@ describe("AuthorComponent", () => {
   it("should display the author when found by id", () => {
     const service = autoSpy(AuthorService);
     service.getAuthor
-      .mockReturnValue({ namee: "test" });
+      .mockReturnValue({ name: "test" });
     const c = new AuthorComponent(service);
     c.ngOnInit();
     expect(c.author).toEqual({ name: "test" });

@@ -1,0 +1,4 @@
+node_modules
+**/auto-spy.ts
+*.spec.ts
+!src/app/app.component.spec.ts
