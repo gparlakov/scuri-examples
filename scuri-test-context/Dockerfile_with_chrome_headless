@@ -1,9 +1,9 @@
 ARG NODE_VERSION=8
 FROM "node:${NODE_VERSION}-buster-slim"
-LABEL name="chrome-headless" \
-	maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
-	version="3.0" \
-	description="Google Chrome Headless in a container"
+LABEL name="angular app in a container" \
+	maintainer="Georgi Parlakov <gparlakov@gmail.com>" \
+	version="2.0" \
+	description="Install a version of Angular cli and create a fresh app. That setup allows for installing of a version of Scuri and e2e testing by running a few commands."
 
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
@@ -44,10 +44,10 @@ ARG NG_NEW_ARGS=
 ARG NG_NEW_NAME=test-scuri-app
 RUN npm init -y
 RUN npm i @angular/cli@$CLI_VERSION
-RUN npx -p @angular/cli@$CLI_VERSION ng new --interactive=false --defaults --skip-git --routing $NG_NEW_ARGS $NG_NEW_NAME
+RUN node node_modules/@angular/cli/bin/ng.js new --interactive=false --defaults --skip-git --routing $NG_NEW_ARGS $NG_NEW_NAME
 WORKDIR $NG_NEW_NAME
 COPY . .
 COPY ./run.sh .
 EXPOSE 4200
-ENV NG_CLI_ANALYTICS=ci
+ENV NG_CLI_ANALYTICS=false
 ENTRYPOINT ./run.sh
