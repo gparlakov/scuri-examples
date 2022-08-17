@@ -58,4 +58,4 @@ jobs:
           build-args: |
             CLI_VERSION=13
             NG_NEW_NAME=test-scuri-ng13-app 
-            NODE_VERSION=13
+            NODE_VERSION=12
