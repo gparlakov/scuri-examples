@@ -1,14 +1,15 @@
+import { LibsApiService } from './libs-api.service';
 import { AppComponent } from './app.component';
 import { autoSpy } from 'autoSpy';
 import { EMPTY } from 'rxjs';
 
 describe('AppComponent', () => {
-  
-  it('it should construct', () => {
+  it('when ngOnInit is called it should', () => {
     // arrange
     const { build } = setup().default();
-    // act
     const a = build();
+    // act
+    a.ngOnInit();
     // assert
     // expect(a).toEqual
   });
@@ -17,13 +18,19 @@ describe('AppComponent', () => {
 
 function setup() {
   
-  const builder = {
+    const usersApi = autoSpy(LibsApiService);
     
+  const builder = {
+    usersApi,
+    withUsersApiGetAllReturn(g: Observable<Lib[]>) {
+        usersApi.getAll.and.returnValue(g);
+        return builder;
+    },
     default() {
       return builder;
     },
     build() {
-      return new AppComponent();
+      return new AppComponent(usersApi);
     }
   };
 
